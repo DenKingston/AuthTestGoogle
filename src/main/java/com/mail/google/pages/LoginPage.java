@@ -3,7 +3,6 @@ package com.mail.google.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage extends Page{
     @FindBy(id = "Email")
@@ -14,8 +13,8 @@ public class LoginPage extends Page{
     private WebElement signInButtonLocator;
     @FindBy(id = "next")
     private WebElement nextButtonLocator;
-public LoginPage(WebDriver pages){
-    super(pages);
+public LoginPage (WebDriver webDriver){
+    super(webDriver);
 }
 
     public LoginPage typeUsername(String usname) {
@@ -35,8 +34,6 @@ public LoginPage(WebDriver pages){
     public void clickNextButton() {
         nextButtonLocator.click();
     }
-    public void init(final WebDriver webDriver) {
-        PageFactory.initElements(webDriver, this);
-    }
 
 }
+

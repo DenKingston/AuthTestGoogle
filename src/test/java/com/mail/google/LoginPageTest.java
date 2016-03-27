@@ -1,23 +1,38 @@
 package com.mail.google;
 
 import com.mail.google.pages.LoginPage;
+import com.mail.google.util.PageAction;
+import org.junit.After;
+import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
 
 public class LoginPageTest {
+    private WebDriver webDriver;
+    private PageAction pageAction = new PageAction(webDriver);
+    private LoginPage loginPage = new LoginPage(webDriver);
+
+    @BeforeTest
+    public void beforeTest(){
+        pageAction.startBrowser();
+    }
     @Test
     public void verifyLogin() {
-        WebDriver webDriver = new FirefoxDriver();
-        webDriver.manage().window().maximize();
-        webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        webDriver.get("https://accounts.google.com/ServiceLogin?service=mail&continue=https://mail.google.com/mail/&hl=ru#identifier");
-        LoginPage loginPage = new LoginPage(webDriver);
+        pageAction.getUrlTestPage("https://accounts.google.com");
         loginPage.typeUsername("denykingston@gmail.com");
         loginPage.clickNextButton();
         loginPage.typePassword("p0lumorphp0lumorph");
         loginPage.clickSignInButton();
-}
+ //       Assert.assertEquals(webDriver.);
+
+    }
+    @AfterTest
+    public void afterTest() {
+    }
 }
