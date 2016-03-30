@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 
 
 public class LoginPageTest {
-    private WebDriver webDriver;
+    private WebDriver webDriver = new FirefoxDriver();
     private PageAction pageAction = new PageAction(webDriver);
     private LoginPage loginPage = new LoginPage(webDriver);
 
