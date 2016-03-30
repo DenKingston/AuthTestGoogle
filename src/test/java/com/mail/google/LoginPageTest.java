@@ -4,8 +4,10 @@ import com.mail.google.pages.LoginPage;
 import com.mail.google.util.PageAction;
 import org.junit.After;
 import org.junit.Before;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -21,18 +23,17 @@ public class LoginPageTest {
     @BeforeTest
     public void beforeTest(){
         pageAction.startBrowser();
+        pageAction.getUrlTestPage("https://accounts.google.com");
     }
     @Test
     public void verifyLogin() {
-        pageAction.getUrlTestPage("https://accounts.google.com");
-        loginPage.typeUsername("denykingston@gmail.com");
-        loginPage.clickNextButton();
-        loginPage.typePassword("p0lumorphp0lumorph");
-        loginPage.clickSignInButton();
- //       Assert.assertEquals(webDriver.);
+        loginPage.typeUsername("denykingston@gmail.com").clickNextButton();
+        loginPage.typePassword("p0lumorphp0lumorph").clickSignInButton();
+        Assert.assertTrue(webDriver.findElement(By.id("gb_71")).isDisplayed());
 
     }
     @AfterTest
     public void afterTest() {
+        pageAction.closeBrowser();
     }
 }
