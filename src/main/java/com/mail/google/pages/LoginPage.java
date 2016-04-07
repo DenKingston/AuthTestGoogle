@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage extends Page{
+public class LoginPage extends Page {
     @FindBy(id = "Email")
     private WebElement userNameLocator;
     @FindBy(id = "Passwd")
@@ -13,9 +13,10 @@ public class LoginPage extends Page{
     private WebElement signInButtonLocator;
     @FindBy(id = "next")
     private WebElement nextButtonLocator;
-public LoginPage (WebDriver webDriver){
-    super(webDriver);
-}
+
+    public LoginPage(WebDriver webDriver) {
+        super(webDriver);
+    }
 
     public LoginPage typeUsername(String usname) {
         userNameLocator.clear();
@@ -28,9 +29,11 @@ public LoginPage (WebDriver webDriver){
         passwordLocator.sendKeys(pswd);
         return this;
     }
+
     public void clickSignInButton() {
         signInButtonLocator.click();
     }
+
     public void clickNextButton() {
         nextButtonLocator.click();
     }

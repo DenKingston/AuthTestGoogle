@@ -4,33 +4,43 @@ import com.mail.google.pages.HomePage;
 import com.mail.google.pages.LoginPage;
 import com.mail.google.util.DateStorage;
 import com.mail.google.util.PageAction;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertTrue;
 
-public class LoginPageTest {
-    private WebDriver webDriver = new FirefoxDriver();
-    private PageAction pageAction = new PageAction(webDriver);
-    private LoginPage loginPage = new LoginPage(webDriver);
-    private HomePage homePage = new HomePage(webDriver);
-    private DateStorage dateStorage = new DateStorage();
+
+public class LoginPageTest extends TestBase {
+    protected PageAction pageAction;
+    protected LoginPage loginPage;
+    protected HomePage homePage;
+
     @BeforeTest
-    public void beforeTest(){
+    @Override
+    public void init() {
+        super.init();
+        pageAction = PageFactory.initElements(driver, PageAction.class);
         pageAction.startBrowser();
-        pageAction.getUrlTestPage(dateStorage.siteUrl);
+        pageAction.getUrlTestPage(baseUrl);
     }
+
     @Test
     public void verifyLogin() {
-        loginPage.typeUsername(dateStorage.userName1).clickNextButton();
-        loginPage.typePassword(dateStorage.password1).clickSignInButton();
-        homePage.checkExitButton();
+        loginPage = PageFactory.initElements(driver, LoginPage.class);
+        loginPage.typeUsername(DateStorage.LOGIN).clickNextButton();
+        loginPage.typePassword(DateStorage.PASSWORD).clickSignInButton();
+        homePage = PageFactory.initElements(driver, HomePage.class);
+        homePage.clickProfileIcon();
+        assertTrue(homePage.getExitButton().isDisplayed(), "Фейл авторизации");
     }
+
     @AfterTest
-    public void afterTest() {
+    @Override
+    public void tearDown() {
         pageAction.closeBrowser();
+        super.tearDown();
     }
 
 }

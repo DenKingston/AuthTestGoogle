@@ -8,24 +8,24 @@ import org.openqa.selenium.support.PageFactory;
  */
 public abstract class Page {
 
-	protected WebDriver webDriver;
+    protected WebDriver webDriver;
 
-	/*
-	 * Constructor injecting the WebDriver interface
-	 * 
-	 * @param webDriver
-	 */
-	public Page(WebDriver webDriver) {
-		PageFactory.initElements(webDriver, this);
-		this.webDriver = webDriver;
-	}
+    /*
+     * Constructor injecting the WebDriver interface
+     *
+     * @param webDriver
+     */
+    public Page(WebDriver webDriver) {
+        PageFactory.initElements(webDriver, this);
+        this.webDriver = webDriver;
+    }
 
-	public WebDriver getWebDriver() {
-		return webDriver;
-	}
+    public WebDriver getWebDriver() {
+        return webDriver;
+    }
 
-	public String getTitle() {
-		return webDriver.getTitle();
-	}
+    public String getTitle() {
+        return webDriver.getTitle();
+    }
 
 }
